@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: simpleshopmysql
+  name: simpleshopmysql
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simpleshopmysql
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: simpleshopmysql
+    spec:
+      containers:
+        - image: noproblem520/simple_shop:latest
+          imagePullPolicy: IfNotPresent
+          name: simpleshopmysql
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysqldb:3310/simpleshop
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: passwd
+          resources: {}
+status: {}
+
